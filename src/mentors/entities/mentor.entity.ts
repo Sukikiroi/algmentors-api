@@ -15,4 +15,6 @@ export class Mentor {
     @Column()
     isActive: boolean;
 
+    @Column()
+    bio: string;
 }
