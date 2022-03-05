@@ -19,6 +19,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     database: 'algmentors',
     autoLoadEntities: true,
     synchronize: true,
+    cache: {
+      duration:30000// 30 secondes
+    },
+  
+
   }),MentorsModule, StudentsModule, TutosModule],
   controllers: [AppController],
   providers: [AppService],

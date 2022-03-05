@@ -19,11 +19,11 @@ export class MentorsService {
   }
 
   async findAll(): Promise<Mentor[]> {
-    return this.mentorRepository.find();
+    return this.mentorRepository.find({ relations: ["tutos"] });
   }
 
   findOne(id): Promise<Mentor> {
-    return this.mentorRepository.findOne(id);
+    return this.mentorRepository.findOne(id,{ relations: ["tutos"] });
   }
 
   update(id: number, updateMentorDto: UpdateMentorDto) {

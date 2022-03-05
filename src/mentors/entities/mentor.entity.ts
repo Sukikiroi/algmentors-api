@@ -1,5 +1,5 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
-
+import {Entity, PrimaryGeneratedColumn, Column,OneToMany} from "typeorm";
+import { Tuto } from "src/tutos/entities/tuto.entity";
 @Entity()
 export class Mentor {
 
@@ -15,6 +15,10 @@ export class Mentor {
     @Column()
     isActive: boolean;
 
-    @Column()
+    @Column() 
     bio: string;
+
+    @OneToMany(() => Tuto, tuto => tuto.mentor)
+    tutos: Tuto[];
+    
 }

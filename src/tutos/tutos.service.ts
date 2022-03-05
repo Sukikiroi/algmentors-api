@@ -1,19 +1,31 @@
 import { Injectable } from '@nestjs/common';
 import { CreateTutoDto } from './dto/create-tuto.dto';
 import { UpdateTutoDto } from './dto/update-tuto.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+
+import { Tuto } from './entities/tuto.entity';
 
 @Injectable()
 export class TutosService {
+
+  constructor(
+    @InjectRepository(Tuto)
+    private readonly tutoRepository: Repository<Tuto>,
+  ) {}
+
+
   create(createTutoDto: CreateTutoDto) {
     return 'This action adds a new tuto';
   }
 
-  findAll() {
-    return `This action returns all tutos`;
+
+  async findAll(): Promise<Tuto[]> {
+    return this.tutoRepository.find({relations:["students"]});
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} tuto`;
+  findOne(id): Promise<Tuto> {
+    return this.tutoRepository.findOne(id,{relations:["students"]});
   }
 
   update(id: number, updateTutoDto: UpdateTutoDto) {
